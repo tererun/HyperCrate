@@ -52,7 +52,7 @@ public final class HyperCrate extends JavaPlugin {
     private void removeCrates() {
         for (Crate crate : crateHandler.getCrateList()) {
             for (CrateLocation crateLocation : crate.getCrateLocations()) {
-                Location addedLocation = crateLocation.getLocation().clone().add(0.5, 2, 0.5);
+                Location addedLocation = crateLocation.getLocation().clone().add(0.5, 2.5, 0.5);
                 for (Hologram hologram : HologramsAPI.getHolograms(HyperCrate.getPlugin())) {
                     if ((addedLocation.getWorld().equals(hologram.getWorld())) && (addedLocation.getX() == hologram.getX()) && (addedLocation.getY() == hologram.getY()) && (addedLocation.getZ() == hologram.getZ())) {
                         hologram.delete();
@@ -63,7 +63,7 @@ public final class HyperCrate extends JavaPlugin {
     }
 
     private void pluginSetup() {
-        UpdateChecker updateChecker = new UpdateChecker(this, 87060);
+        new UpdateChecker(this, 87060);
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
         plugin = this;
         itemClickHandler = new ItemClickHandler();

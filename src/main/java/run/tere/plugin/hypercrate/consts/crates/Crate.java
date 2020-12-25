@@ -68,7 +68,7 @@ public class Crate {
     public void createBlock(Location location) {
         addCrateLocation(location);
         if (HyperCrate.isUseHolographicDisplays()) {
-            Hologram hologram = HologramsAPI.createHologram(HyperCrate.getPlugin(), location.clone().add(0.5, 2, 0.5));
+            Hologram hologram = HologramsAPI.createHologram(HyperCrate.getPlugin(), location.clone().add(0.5, 2.5, 0.5));
             for (int i = 0; i < crateSettings.getHolographics().size(); i++) {
                 hologram.insertTextLine(i, crateSettings.getHolographics().get(i));
             }
@@ -81,7 +81,7 @@ public class Crate {
     public void breakBlock(Location location) {
         removeCrateLocation(location);
         if (HyperCrate.isUseHolographicDisplays()) {
-            Location addedLocation = location.clone().add(0.5, 2, 0.5);
+            Location addedLocation = location.clone().add(0.5, 2.5, 0.5);
             for (Hologram hologram : HologramsAPI.getHolograms(HyperCrate.getPlugin())) {
                 if ((addedLocation.getWorld().equals(hologram.getWorld())) && (addedLocation.getX() == hologram.getX()) && (addedLocation.getY() == hologram.getY()) && (addedLocation.getZ() == hologram.getZ())) {
                     hologram.delete();
@@ -133,7 +133,7 @@ public class Crate {
     public void updateHolographics() {
         if (HyperCrate.isUseHolographicDisplays()) {
             for (CrateLocation crateLocation : this.crateLocations) {
-                Location addedLocation = crateLocation.getLocation().clone().add(0.5, 2, 0.5);
+                Location addedLocation = crateLocation.getLocation().clone().add(0.5, 2.5, 0.5);
                 for (Hologram hologram : HologramsAPI.getHolograms(HyperCrate.getPlugin())) {
                     if ((addedLocation.getWorld().equals(hologram.getWorld())) && (addedLocation.getX() == hologram.getX()) && (addedLocation.getY() == hologram.getY()) && (addedLocation.getZ() == hologram.getZ())) {
                         hologram.clearLines();
