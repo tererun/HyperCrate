@@ -1,5 +1,5 @@
 name: HyperCrate
-version: Patch-1.0.2
+version: Patch-1.0.3
 main: run.tere.plugin.hypercrate.HyperCrate
 api-version: 1.16
 authors: [ tererun ]

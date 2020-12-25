@@ -32,7 +32,7 @@ public class HyperCrateSettingsGUI {
         Inventory inventory = Bukkit.createInventory(null, 27, "§6§lHyperCrate Crate Settings");
         inventory.setItem(0, ItemStackAPI.getItemStack(Material.BARRIER, 1, HyperCrate.getLanguage().get("Delete_Crate"), null, key, "delete"));
         inventory.setItem(8, ItemStackAPI.getItemStack(Material.BOOK, 1, "§2§lINFO", Arrays.asList("§aCrateName§f:", crate.getCrateSettings().getCrateName(), "§aUUID§f:", crate.getCrateSettings().getCrateKey()), key, "info"));
-        inventory.setItem(13, ItemStackAPI.getItemStack(Material.CHEST, 1, HyperCrate.getLanguage().get("Change_CrateItem"), null, key, "items"));
+        inventory.setItem(13, ItemStackAPI.getItemStack(Material.CHEST, 1, HyperCrate.getLanguage().get("Change_ItemRewards"), null, key, "items"));
         inventory.setItem(18, ItemStackAPI.getItemStack(Material.GRASS_BLOCK, 1, HyperCrate.getLanguage().get("Get_CrateBlock"), null, key, "getCrateBlock"));
         inventory.setItem(19, ItemStackAPI.getItemStack(Material.TRIPWIRE_HOOK, 1, HyperCrate.getLanguage().get("Get_CrateKey"), null, key, "getCrateKey"));
         inventory.setItem(21, ItemStackAPI.getItemStack(Material.NAME_TAG, 1, HyperCrate.getLanguage().get("Change_Name"), null, key, "name"));
@@ -45,7 +45,15 @@ public class HyperCrateSettingsGUI {
     }
 
     public static Inventory getCrateItemSettingsGUI(Crate crate) {
-        Inventory inventory = Bukkit.createInventory(null, 54, "§6§lHyperCrate CrateItem Settings§7 " + crate.getCrateSettings().getCrateKey());
+        Inventory inventory = Bukkit.createInventory(null, 54, "§6§lHyperCrate ItemRewards Settings§7 " + crate.getCrateSettings().getCrateKey());
+        for (ItemStack crateItem : crate.getCrateItems().getCrateItems()) {
+            inventory.addItem(crateItem);
+        }
+        return inventory;
+    }
+
+    public static Inventory getCrateItemRewardsGUI(Crate crate) {
+        Inventory inventory = Bukkit.createInventory(null, 54, "§6§l" + crate.getCrateSettings().getCrateName() + "§6§l HC ItemRewards");
         for (ItemStack crateItem : crate.getCrateItems().getCrateItems()) {
             inventory.addItem(crateItem);
         }

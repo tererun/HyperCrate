@@ -11,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.apis.NBTEditor;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
+import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
+
+import java.util.List;
 
 public class HyperCrateInteractListener implements Listener {
     @EventHandler
@@ -18,16 +21,27 @@ public class HyperCrateInteractListener implements Listener {
         Player player = e.getPlayer();
         ItemStack itemStack = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
         Block block = e.getClickedBlock();
-        if ((e.getHand() == null) || (!e.getHand().equals(EquipmentSlot.HAND)) || (!e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) || (block == null)) return;
+        if ((e.getHand() == null) || (!e.getHand().equals(EquipmentSlot.HAND)) || (block == null)) return;
         if (!HyperCrate.getCrateHandler().containsCrateFromLocation(block.getLocation())) return;
         Crate crate = HyperCrate.getCrateHandler().getCrateFromLocation(block.getLocation());
-        e.setCancelled(true);
-        if ((itemStack == null) || (!NBTEditor.contains(itemStack, "HyperCrateKey") || (!NBTEditor.getString(itemStack, "HyperCrateKey").equalsIgnoreCase(crate.getCrateSettings().getCrateKey())))) {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("CrateKey_Error"));
-            return;
-        }
-        if (crate.roll(player)) {
-            itemStack.setAmount(itemStack.getAmount() - 1);
+        if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+            if (player.isSneaking()) return;
+            e.setCancelled(true);
+            List<ItemStack> crateItemStacks = crate.getCrateItems().getCrateItems();
+            if (crateItemStacks.isEmpty()) {
+                player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Crate_Empty_Error"));
+                return;
+            }
+            player.openInventory(HyperCrateSettingsGUI.getCrateItemRewardsGUI(crate));
+        } else if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            e.setCancelled(true);
+            if ((itemStack == null) || (!NBTEditor.contains(itemStack, "HyperCrateKey") || (!NBTEditor.getString(itemStack, "HyperCrateKey").equalsIgnoreCase(crate.getCrateSettings().getCrateKey())))) {
+                player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("CrateKey_Error"));
+                return;
+            }
+            if (crate.roll(player)) {
+                itemStack.setAmount(itemStack.getAmount() - 1);
+            }
         }
     }
 }

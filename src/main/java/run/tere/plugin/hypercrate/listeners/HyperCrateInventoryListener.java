@@ -21,19 +21,22 @@ import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class HyperCrateInventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         String inventoryTitle = e.getView().getTitle();
+        if (inventoryTitle.endsWith("§6§l HC ItemRewards")) {
+            e.setCancelled(true);
+            return;
+        }
         if (!inventoryTitle.startsWith("§6§lHyperCrate ")) return;
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem != null) {
             if (!NBTEditor.contains(clickedItem, "HyperCrateGUIItem")) {
-                if (!inventoryTitle.startsWith("§6§lHyperCrate CrateItem Settings§7 ")) e.setCancelled(true);
+                if (!inventoryTitle.startsWith("§6§lHyperCrate ItemRewards Settings§7 ")) e.setCancelled(true);
                 return;
             }
             String itemType = NBTEditor.getString(clickedItem, "HyperCrateGUIItem");
@@ -95,7 +98,7 @@ public class HyperCrateInventoryListener implements Listener {
                     TypeChat typeChat = new TypeChat(player.getUniqueId(), crate, TypeChatType.NAME, 600L);
                     HyperCrate.getTypeChatHandler().addTypeChat(typeChat);
                 } else if (itemType.equalsIgnoreCase("getCrateBlock")) {
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Item_gave"));
+                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
                     player.closeInventory();
                     player.getInventory().addItem(crate.getCrateSettings().getCrateBlock());
                 } else if (itemType.equalsIgnoreCase("getCrateKey")) {
@@ -110,7 +113,7 @@ public class HyperCrateInventoryListener implements Listener {
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         String inventoryTitle = e.getView().getTitle();
-        if (!inventoryTitle.startsWith("§6§lHyperCrate CrateItem Settings§7 ")) return;
+        if (!inventoryTitle.startsWith("§6§lHyperCrate ItemRewards Settings§7 ")) return;
         Player player = (Player) e.getPlayer();
         Crate crate = HyperCrate.getCrateHandler().getCrateFromKey(inventoryTitle.split(" ")[3]);
         crate.getCrateItems().clearAll();
