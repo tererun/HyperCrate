@@ -37,7 +37,7 @@ ItemClick_DisplayItem_Message: "§aYou have 30 seconds to click on the target it
 Set_Item: "§aSet Item!"
 Set_Item_Timeup: "§aThe item set has been canceled because the valid time has expired."
 TypeChat_Message: "§aYou have 30 seconds to enter the target text."
-TypeChat_Holo_Message: "§aYou have 30 seconds to enter the target text. The format of the hologram is as follows§f: §a<Line number>:<Text>"
+TypeChat_Holo_Message: "§aYou have 30 seconds to enter the target text. If you want to erase the hologram in that line, enter a space. The format of the hologram is as follows§f: §a<Line number>:<Text>"
 TypeChat_Holo_Error_Message: "§cThe format of the hologram is as follows§f: §a<Line number>:<Text>"
 TypeChat_Sound_Message: "§aYou have 30 seconds to enter the target text. The format of the sound is as follows§f: §ahttps://minecraft.gamepedia.com/Sounds.json#Java_Edition_values"
 TypeChat_Already_Exists_Name_Error: "§cThat name has already been used by other crates."

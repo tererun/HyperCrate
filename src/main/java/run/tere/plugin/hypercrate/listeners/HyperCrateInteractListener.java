@@ -22,7 +22,12 @@ public class HyperCrateInteractListener implements Listener {
         ItemStack itemStack = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
         Block block = e.getClickedBlock();
         if ((e.getHand() == null) || (!e.getHand().equals(EquipmentSlot.HAND)) || (block == null)) return;
-        if (!HyperCrate.getCrateHandler().containsCrateFromLocation(block.getLocation())) return;
+        if (!HyperCrate.getCrateHandler().containsCrateFromLocation(block.getLocation())) {
+            if (NBTEditor.contains(itemStack, "HyperCrateKey")) {
+                e.setCancelled(true);
+            }
+            return;
+        }
         Crate crate = HyperCrate.getCrateHandler().getCrateFromLocation(block.getLocation());
         if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             if (player.isSneaking()) return;
