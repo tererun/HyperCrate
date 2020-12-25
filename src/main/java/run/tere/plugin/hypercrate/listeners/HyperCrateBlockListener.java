@@ -20,6 +20,11 @@ public class HyperCrateBlockListener implements Listener {
         Block block = e.getBlock();
         Location blockLocation = block.getLocation();
         ItemStack itemStack = e.getItemInHand();
+        if (NBTEditor.contains(itemStack, "HyperCrateKey")) {
+            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Cannot_Place_Key"));
+            e.setCancelled(true);
+            return;
+        }
         if ((!NBTEditor.contains(itemStack, "HyperCrateBlock")) || (!HyperCrate.getCrateHandler().containsCrateFromKey(NBTEditor.getString(itemStack, "HyperCrateBlock")))) return;
         if (!player.isOp()) {
             player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));

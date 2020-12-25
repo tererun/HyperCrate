@@ -15,6 +15,7 @@ run\tere\plugin\hypercrate\apis\NBTEditor$NBTCompound.class
 run\tere\plugin\hypercrate\apis\ConfigLanguage.class
 run\tere\plugin\hypercrate\consts\crates\CrateLocation.class
 run\tere\plugin\hypercrate\consts\itemclick\ItemClick.class
+run\tere\plugin\hypercrate\update\UpdateChecker.class
 run\tere\plugin\hypercrate\apis\JsonAPI.class
 run\tere\plugin\hypercrate\commands\HyperCrateCommandClass.class
 run\tere\plugin\hypercrate\apis\ItemStackAPI.class

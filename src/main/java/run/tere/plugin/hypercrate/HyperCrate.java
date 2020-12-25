@@ -21,6 +21,7 @@ import run.tere.plugin.hypercrate.handlers.TypeChatHandler;
 import run.tere.plugin.hypercrate.listeners.HyperCrateBlockListener;
 import run.tere.plugin.hypercrate.listeners.HyperCrateInteractListener;
 import run.tere.plugin.hypercrate.listeners.HyperCrateInventoryListener;
+import run.tere.plugin.hypercrate.update.UpdateChecker;
 
 import java.io.File;
 
@@ -62,6 +63,7 @@ public final class HyperCrate extends JavaPlugin {
     }
 
     private void pluginSetup() {
+        UpdateChecker updateChecker = new UpdateChecker(this, 87060);
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
         plugin = this;
         itemClickHandler = new ItemClickHandler();

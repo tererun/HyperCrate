@@ -10,7 +10,6 @@ import java.io.*;
 public class JsonAPI {
     public static void write(CrateHandler crateHandler, String fileName) {
         File file = new File(HyperCrate.getPlugin().getDataFolder(), fileName + ".json");
-        //OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         try (Writer writer = new OutputStreamWriter(
                 new FileOutputStream(file),"UTF-8")) {
             Gson gson = new GsonBuilder().create();

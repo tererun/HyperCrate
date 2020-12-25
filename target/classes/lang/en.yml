@@ -5,6 +5,7 @@ Break_Block: "§aRemoved the crate block!"
 
 Gave_Item: "§aGave the item!"
 
+Cannot_Place_Key: "§cCrate key cannot be placed!"
 Inventory_Full: "§aItems were dropped on the ground because the inventory was full sail."
 Sneak_Break: "§aIf you break it while sneaking, the crate block will break."
 Permission_Error: "§4You don't have the required permissions!"
