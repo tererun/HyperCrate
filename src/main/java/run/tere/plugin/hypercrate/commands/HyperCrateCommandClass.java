@@ -14,11 +14,11 @@ public class HyperCrateCommandClass implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("hypercrate")) {
-            if (!sender.isOp()) {
-                sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
-                return true;
-            }
             if (args.length == 0) {
+                if (!sender.hasPermission("hypercrate.commands.help")) {
+                    sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+                    return true;
+                }
                 sender.sendMessage("§7======= §f§l<§6HyperCrate§f§l> §7=======");
                 sender.sendMessage("§e§lAuthor§f: tererun");
                 sender.sendMessage("§e§lVersion§f: " + HyperCrate.getPlugin().getDescription().getVersion());
@@ -29,6 +29,10 @@ public class HyperCrateCommandClass implements CommandExecutor {
                 sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
             } else {
                 if (args[0].equalsIgnoreCase("givekey")) {
+                    if (!sender.hasPermission("hypercrate.commands.getkey")) {
+                        sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+                        return true;
+                    }
                     if (args.length < 3) {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Wrong_Command"));
                         return true;
@@ -53,6 +57,10 @@ public class HyperCrateCommandClass implements CommandExecutor {
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("settings")) {
+                    if (!sender.hasPermission("hypercrate.commands.settings")) {
+                        sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+                        return true;
+                    }
                     if (!(sender instanceof Player)) {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Player_Command"));
                         return true;

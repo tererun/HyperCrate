@@ -23,8 +23,10 @@ public class HyperCrateInteractListener implements Listener {
         Block block = e.getClickedBlock();
         if ((e.getHand() == null) || (!e.getHand().equals(EquipmentSlot.HAND)) || (block == null)) return;
         if (!HyperCrate.getCrateHandler().containsCrateFromLocation(block.getLocation())) {
-            if (NBTEditor.contains(itemStack, "HyperCrateKey")) {
-                e.setCancelled(true);
+            if (itemStack != null) {
+                if (NBTEditor.contains(itemStack, "HyperCrateKey")) {
+                    e.setCancelled(true);
+                }
             }
             return;
         }

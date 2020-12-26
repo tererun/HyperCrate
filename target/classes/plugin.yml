@@ -9,3 +9,26 @@ softdepend:
 commands:
   hypercrate:
     description: hypercrate commands!
+permissions:
+  hypercrate.*:
+    description: hypercrate main permissions
+    children:
+      hypercrate.commands.*: true
+      hypercrate.commands.help: true
+      hypercrate.commands.getkey: true
+      hypercrate.commands.settings: true
+  hypercrate.commands.*:
+    description: hypercrate commands permissions
+    children:
+      hypercrate.commands.help: true
+      hypercrate.commands.getkey: true
+      hypercrate.commands.settings: true
+  hypercrate.commands.help:
+    description: hypercrate help command permission
+    default: op
+  hypercrate.commands.getkey:
+    description: hypercrate getkey command permission
+    default: op
+  hypercrate.commands.settings:
+    description: hypercrate settings command permission
+    default: op

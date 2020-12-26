@@ -17,10 +17,12 @@ public class UpdateChecker implements Listener {
     private Plugin plugin;
     private int resourceId;
     private boolean newVersionBool;
+    private String url;
 
-    public UpdateChecker(Plugin plugin, int resourceId) {
+    public UpdateChecker(Plugin plugin, int resourceId, String url) {
         this.plugin = plugin;
         this.resourceId = resourceId;
+        this.url = url;
         confirmNewVersion();
         if (this.newVersionBool) {
             Bukkit.getPluginManager().registerEvents(this, this.plugin);
@@ -36,7 +38,7 @@ public class UpdateChecker implements Listener {
                     newVersionBool = !nowVersion.equalsIgnoreCase(newVersion);
                     this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
                     this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
-                    this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §ehttps://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId);
+                    this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
                 }
             } catch (IOException exception) {
                 newVersionBool = false;
@@ -55,7 +57,7 @@ public class UpdateChecker implements Listener {
         if (player.isOp()) {
             player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
             player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §ehttps://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId);
+            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
         }
     }
 }
