@@ -1,5 +1,5 @@
 name: HyperCrate
-version: Patch-1.0.5
+version: Patch-1.0.6
 main: run.tere.plugin.hypercrate.HyperCrate
 api-version: 1.16
 authors: [ tererun ]
@@ -26,8 +26,8 @@ permissions:
   hypercrate.commands.help:
     description: hypercrate help command permission
     default: op
-  hypercrate.commands.getkey:
-    description: hypercrate getkey command permission
+  hypercrate.commands.givekey:
+    description: hypercrate givekey command permission
     default: op
   hypercrate.commands.settings:
     description: hypercrate settings command permission

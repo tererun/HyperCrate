@@ -36,9 +36,11 @@ public class UpdateChecker implements Listener {
                     String nowVersion = this.plugin.getDescription().getVersion();
                     String newVersion = scanner.next();
                     newVersionBool = !nowVersion.equalsIgnoreCase(newVersion);
-                    this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
-                    this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
-                    this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
+                    if (newVersionBool) {
+                        this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
+                        this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
+                        this.plugin.getLogger().info(HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
+                    }
                 }
             } catch (IOException exception) {
                 newVersionBool = false;

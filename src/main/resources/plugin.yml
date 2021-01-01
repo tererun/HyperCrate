@@ -26,8 +26,8 @@ permissions:
   hypercrate.commands.help:
     description: hypercrate help command permission
     default: op
-  hypercrate.commands.getkey:
-    description: hypercrate getkey command permission
+  hypercrate.commands.givekey:
+    description: hypercrate givekey command permission
     default: op
   hypercrate.commands.settings:
     description: hypercrate settings command permission

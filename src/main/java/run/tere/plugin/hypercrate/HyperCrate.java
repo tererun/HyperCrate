@@ -63,7 +63,7 @@ public final class HyperCrate extends JavaPlugin {
     }
 
     private void pluginSetup() {
-        new UpdateChecker(this, 87060);
+        new UpdateChecker(this, 87060, "https://www.spigotmc.org/resources/hypercrate.87060/");
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
         plugin = this;
         itemClickHandler = new ItemClickHandler();
@@ -77,6 +77,7 @@ public final class HyperCrate extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("hypercrate").setExecutor(new HyperCrateCommandClass());
+        getCommand("hypercrate").setTabCompleter(new HyperCrateCommandClass());
     }
 
     private void registerEvents() {

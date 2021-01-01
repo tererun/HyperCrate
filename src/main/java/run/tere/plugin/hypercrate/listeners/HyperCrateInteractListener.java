@@ -2,6 +2,7 @@ package run.tere.plugin.hypercrate.listeners;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -21,6 +22,7 @@ public class HyperCrateInteractListener implements Listener {
         Player player = e.getPlayer();
         ItemStack itemStack = player.getInventory().getItem(player.getInventory().getHeldItemSlot());
         Block block = e.getClickedBlock();
+        if ((e.useInteractedBlock().equals(Event.Result.DENY)) || (e.useInteractedBlock().equals(Event.Result.DENY))) return;
         if ((e.getHand() == null) || (!e.getHand().equals(EquipmentSlot.HAND)) || (block == null)) return;
         if (!HyperCrate.getCrateHandler().containsCrateFromLocation(block.getLocation())) {
             if (itemStack != null) {
