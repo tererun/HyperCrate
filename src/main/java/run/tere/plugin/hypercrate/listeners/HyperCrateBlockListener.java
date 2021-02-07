@@ -26,7 +26,7 @@ public class HyperCrateBlockListener implements Listener {
             return;
         }
         if ((!NBTEditor.contains(itemStack, "HyperCrateBlock")) || (!HyperCrate.getCrateHandler().containsCrateFromKey(NBTEditor.getString(itemStack, "HyperCrateBlock")))) return;
-        if (!player.isOp()) {
+        if (!player.hasPermission("hypercrate.actions.place")) {
             player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
             return;
         }
@@ -42,7 +42,7 @@ public class HyperCrateBlockListener implements Listener {
         Location blockLocation = block.getLocation();
         if (!HyperCrate.getCrateHandler().containsCrateFromLocation(blockLocation)) return;
         Crate crate = HyperCrate.getCrateHandler().getCrateFromLocation(blockLocation);
-        if (!player.isOp()) {
+        if (!player.hasPermission("hypercrate.actions.break")) {
             e.setCancelled(true);
             player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
             return;
