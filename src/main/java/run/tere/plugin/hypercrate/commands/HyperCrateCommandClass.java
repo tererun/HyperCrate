@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
+import run.tere.plugin.hypercrate.consts.languages.Language;
 import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
 
 import java.util.ArrayList;
@@ -89,6 +90,18 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                     sender.sendMessage("§a /hypercrate givekey <Player> <CrateName>§f: Give player crate key");
                     //sender.sendMessage("§a /hypercrate rollcrate <Player> <CrateName>§f: roll the crate");
                     sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
+                    sender.sendMessage("§a /hypercrate reload§f: Reload HyperCrate Config");
+                } else if (args[0].equalsIgnoreCase("reload")) {
+                    if (!sender.hasPermission("hypercrate.commands.reload")) {
+                        sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+                        return true;
+                    }
+                    sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §7§oReloading...");
+                    HyperCrate.getPlugin().reloadConfig();
+                    HyperCrate.setConfigruation(HyperCrate.getPlugin().getConfig());
+                    HyperCrate.getConfigLanguage().reloadConfig();
+                    HyperCrate.setLanguage(new Language());
+                    sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §a§oReload Complete!");
                 } else {
                     sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Wrong_Command"));
                 }
@@ -107,12 +120,14 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
         if (sender.hasPermission("hypercrate.commands.help")) tabList.add("help");
         if (sender.hasPermission("hypercrate.commands.givekey")) tabList.add("givekey");
         if (sender.hasPermission("hypercrate.commands.settings")) tabList.add("settings");
+        if (sender.hasPermission("hypercrate.commands.reload")) tabList.add("reload");
         if (args.length == 1) {
             if (args[0].length() == 0) {
                 List<String> list = new ArrayList<>();
                 if (sender.hasPermission("hypercrate.commands.help")) list.add("help");
                 if (sender.hasPermission("hypercrate.commands.givekey")) list.add("givekey");
                 if (sender.hasPermission("hypercrate.commands.settings")) list.add("settings");
+                if (sender.hasPermission("hypercrate.commands.reload")) list.add("reload");
                 return list;
             }
             List<String> list = new ArrayList<>();
@@ -125,7 +140,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
         } else if (args.length >= 2) {
             if (tabList.contains(args[0])) {
                 if (args[0].equalsIgnoreCase("givekey")) {
-                    if (sender.hasPermission("hypercrate.commands.givekey")) {
+                    if (sender.hasPermission("hypercrate.commands.gisvekey")) {
                         if (args.length == 2) {
                             List<String> playerNames = new ArrayList<>();
                             for (Player player : Bukkit.getOnlinePlayers()) {

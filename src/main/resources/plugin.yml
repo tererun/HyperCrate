@@ -17,7 +17,7 @@ permissions:
       hypercrate.commands.help: true
       hypercrate.commands.getkey: true
       hypercrate.commands.settings: true
-      hypercrate.place: true
+      hypercrate.commands.reload: true
       hypercrate.actions.*: true
       hypercrate.actions.break: true
       hypercrate.actions.place: true
@@ -27,6 +27,7 @@ permissions:
       hypercrate.commands.help: true
       hypercrate.commands.getkey: true
       hypercrate.commands.settings: true
+      hypercrate.commands.reload: true
   hypercrate.commands.help:
     description: hypercrate help command permission
     default: op
@@ -35,6 +36,9 @@ permissions:
     default: op
   hypercrate.commands.settings:
     description: hypercrate settings command permission
+    default: op
+  hypercrate.commands.reload:
+    description: hypercrate reload command permission
     default: op
   hypercrate.actions.*:
     description: hypercrate actions permission

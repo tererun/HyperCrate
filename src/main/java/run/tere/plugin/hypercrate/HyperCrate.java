@@ -125,8 +125,16 @@ public final class HyperCrate extends JavaPlugin {
         return config;
     }
 
+    public static void setConfigruation(FileConfiguration config) {
+        HyperCrate.config = config;
+    }
+
     public static Language getLanguage() {
         return language;
+    }
+
+    public static void setLanguage(Language language) {
+        HyperCrate.language = language;
     }
 
     public static CrateHandler getCrateHandler() {
@@ -135,6 +143,10 @@ public final class HyperCrate extends JavaPlugin {
 
     public static ConfigLanguage getConfigLanguage() {
         return configLanguage;
+    }
+
+    public static void setConfigLanguage(ConfigLanguage configLanguage) {
+        HyperCrate.configLanguage = configLanguage;
     }
 
     public static boolean isUseHolographicDisplays() {
