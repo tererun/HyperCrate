@@ -1,0 +1,53 @@
+name: HyperCrate
+version: ${project.version}
+main: run.tere.plugin.hypercrate.HyperCrate
+api-version: 1.16
+authors: [ tererun ]
+description: HyperCrate is HyperCrate!
+softdepend:
+  - HolographicDisplays
+commands:
+  hypercrate:
+    description: hypercrate commands!
+permissions:
+  hypercrate.*:
+    description: hypercrate main permissions
+    children:
+      hypercrate.commands.*: true
+      hypercrate.commands.help: true
+      hypercrate.commands.getkey: true
+      hypercrate.commands.settings: true
+      hypercrate.commands.reload: true
+      hypercrate.actions.*: true
+      hypercrate.actions.break: true
+      hypercrate.actions.place: true
+  hypercrate.commands.*:
+    description: hypercrate commands permissions
+    children:
+      hypercrate.commands.help: true
+      hypercrate.commands.getkey: true
+      hypercrate.commands.settings: true
+      hypercrate.commands.reload: true
+  hypercrate.commands.help:
+    description: hypercrate help command permission
+    default: op
+  hypercrate.commands.givekey:
+    description: hypercrate givekey command permission
+    default: op
+  hypercrate.commands.settings:
+    description: hypercrate settings command permission
+    default: op
+  hypercrate.commands.reload:
+    description: hypercrate reload command permission
+    default: op
+  hypercrate.actions.*:
+    description: hypercrate actions permission
+    children:
+      hypercrate.actions.break: true
+      hypercrate.actions.place: true
+  hypercrate.actions.break:
+    description: hypercrate break action permission
+    default: op
+  hypercrate.actions.place:
+    description: hypercrate place action permission
+    default: op
