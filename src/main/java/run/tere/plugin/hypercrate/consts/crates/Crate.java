@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.apis.InventoryAPI;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,29 +39,30 @@ public class Crate {
         Inventory playerInv = player.getInventory();
         List<ItemStack> crateItemStacks = this.crateItems.getCrateItems();
         if (crateItemStacks.isEmpty()) {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Crate_Empty_Error"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Crate_Empty_Error"));
             return false;
         }
         Collections.shuffle(crateItemStacks);
         player.playSound(player.getLocation(), this.crateSettings.getRollFinishSound(), 1F, 1F);
         if (InventoryAPI.isInventoryFull(playerInv)) {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Inventory_Full"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Inventory_Full"));
             player.getWorld().dropItemNaturally(player.getLocation(), crateItemStacks.get(0));
         } else {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
             player.getInventory().addItem(crateItemStacks.get(0));
         }
         return true;
     }
 
-    public void giveCrateKey(Player player) {
+    public void giveCrateKey(Player player, int amount) {
         Inventory playerInv = player.getInventory();
-        ItemStack crateKeyItem = this.crateSettings.getCrateKeyItem();
+        ItemStack crateKeyItem = this.crateSettings.getCrateKeyItem().clone();
+        crateKeyItem.setAmount(amount);
         if (InventoryAPI.isInventoryFull(playerInv)) {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Inventory_Full"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Inventory_Full"));
             player.getWorld().dropItemNaturally(player.getLocation(), crateKeyItem);
         } else {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
             player.getInventory().addItem(crateKeyItem);
         }
     }

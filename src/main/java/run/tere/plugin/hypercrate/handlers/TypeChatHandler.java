@@ -37,7 +37,7 @@ public class TypeChatHandler implements Listener {
             case HOLO:
                 String[] texts = message.split(":", 2);
                 if ((texts.length == 0) || (!NumberUtils.isDigits(texts[0]))) {
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Holo_Error_Message"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Holo_Error_Message"));
                     removeTypeChat(typeChat);
                     return;
                 }
@@ -48,7 +48,7 @@ public class TypeChatHandler implements Listener {
                 break;
             case NAME:
                 if (HyperCrate.getCrateHandler().containsCrate(message)) {
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Already_Exists_Name_Error"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Already_Exists_Name_Error"));
                     removeTypeChat(typeChat);
                     return;
                 }
@@ -57,7 +57,7 @@ public class TypeChatHandler implements Listener {
         }
         this.removeTypeChat(typeChat);
         HyperCrate.getCrateHandler().saveCrateHandler();
-        player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_TypeChat"));
+        ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_TypeChat"));
     }
 
     public void addTypeChat(TypeChat typeChat) {

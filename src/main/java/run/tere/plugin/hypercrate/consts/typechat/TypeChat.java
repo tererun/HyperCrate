@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scheduler.BukkitRunnable;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class TypeChat {
                 HyperCrate.getTypeChatHandler().removeTypeChat(typeChat);
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
                 if (offlinePlayer.isOnline()) {
-                    Bukkit.getPlayer(uuid).sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_TypeChat_Timeup"));
+                    ChatUtil.sendMessage(Bukkit.getPlayer(uuid), (HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_TypeChat_Timeup")));
                 }
             }
         };

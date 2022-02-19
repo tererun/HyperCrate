@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import run.tere.plugin.hypercrate.HyperCrate;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,9 +58,9 @@ public class UpdateChecker implements Listener {
         Player player = e.getPlayer();
         if (!hasNewVersion()) return;
         if (player.isOp()) {
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " §aA new version has been released!");
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " §aDownload it here >");
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " §e" + this.url);
         }
     }
 }

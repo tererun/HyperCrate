@@ -11,6 +11,7 @@ import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
 import run.tere.plugin.hypercrate.consts.itemclick.ItemClick;
 import run.tere.plugin.hypercrate.consts.itemclick.ItemClickType;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -56,7 +57,7 @@ public class ItemClickHandler implements Listener {
         }
         this.removeItemClick(itemClick);
         HyperCrate.getCrateHandler().saveCrateHandler();
-        player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item"));
+        ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item"));
     }
 
     public void addItemClick(ItemClick itemClick) {

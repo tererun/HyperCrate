@@ -30,6 +30,7 @@ public final class HyperCrate extends JavaPlugin {
     private static Plugin plugin;
 
     private static boolean useHolographicDisplays;
+    private static boolean usePlaceholderAPI;
 
     private static FileConfiguration config;
     private static ConfigLanguage configLanguage;
@@ -65,6 +66,7 @@ public final class HyperCrate extends JavaPlugin {
     private void pluginSetup() {
         new UpdateChecker(this, 87060, "https://www.spigotmc.org/resources/hypercrate.87060/");
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
+        usePlaceholderAPI = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
         plugin = this;
         itemClickHandler = new ItemClickHandler();
         typeChatHandler = new TypeChatHandler();
@@ -151,6 +153,10 @@ public final class HyperCrate extends JavaPlugin {
 
     public static boolean isUseHolographicDisplays() {
         return useHolographicDisplays;
+    }
+
+    public static boolean isUsePlaceholderAPI() {
+        return usePlaceholderAPI;
     }
 
     public static ItemClickHandler getItemClickHandler() {

@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
 import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.List;
 
@@ -38,14 +39,14 @@ public class HyperCrateInteractListener implements Listener {
             e.setCancelled(true);
             List<ItemStack> crateItemStacks = crate.getCrateItems().getCrateItems();
             if (crateItemStacks.isEmpty()) {
-                player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Crate_Empty_Error"));
+                ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Crate_Empty_Error"));
                 return;
             }
             player.openInventory(HyperCrateSettingsGUI.getCrateItemRewardsGUI(crate));
         } else if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             e.setCancelled(true);
             if ((itemStack == null) || (!NBTEditor.contains(itemStack, "HyperCrateKey") || (!NBTEditor.getString(itemStack, "HyperCrateKey").equalsIgnoreCase(crate.getCrateSettings().getCrateKey())))) {
-                player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("CrateKey_Error"));
+                ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("CrateKey_Error"));
                 return;
             }
             if (crate.roll(player)) {

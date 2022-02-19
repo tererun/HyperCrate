@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scheduler.BukkitRunnable;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.UUID;
 
@@ -22,9 +23,9 @@ public class ItemClick {
         this.crate = crate;
         this.itemClickType = itemClickType;
         if (itemClickType.equals(ItemClickType.DISPLAY_ITEM)) {
-            Bukkit.getPlayer(uuid).sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("ItemClick_DisplayItem_Message"));
+            ChatUtil.sendMessage(Bukkit.getPlayer(uuid), (HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("ItemClick_DisplayItem_Message")));
         } else {
-            Bukkit.getPlayer(uuid).sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("ItemClick_Message"));
+            ChatUtil.sendMessage(Bukkit.getPlayer(uuid), (HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("ItemClick_Message")));
         }
         this.bukkitRunnable = new BukkitRunnable() {
             @Override
@@ -32,7 +33,7 @@ public class ItemClick {
                 HyperCrate.getItemClickHandler().removeItemClick(itemClick);
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
                 if (offlinePlayer.isOnline()) {
-                    Bukkit.getPlayer(uuid).sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item_Timeup"));
+                    ChatUtil.sendMessage(Bukkit.getPlayer(uuid), (HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item_Timeup")));
                 }
             }
         };

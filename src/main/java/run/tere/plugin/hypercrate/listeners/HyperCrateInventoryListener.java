@@ -18,6 +18,7 @@ import run.tere.plugin.hypercrate.consts.itemclick.ItemClickType;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChat;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChatType;
 import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +54,7 @@ public class HyperCrateInventoryListener implements Listener {
                     CrateSettings crateSettings = new CrateSettings(Material.CHEST, crateName, crateKey, ItemStackAPI.getDefaultCrateKey(crateName, crateKey), "minecraft:block.chest.open", InventoryAPI.getStringFromItemStack(new ItemStack(Material.DROPPER, 1)), new ArrayList<>(Arrays.asList("§b" + crateName)));
                     Crate crate = new Crate(crateSettings);
                     HyperCrate.getCrateHandler().addCrate(crate);
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Created_Crate"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Created_Crate"));
                     player.openInventory(HyperCrateSettingsGUI.getCrateSettingGUI(crate));
                 }
             } else if (inventoryTitle.equalsIgnoreCase("§6§lHyperCrate Crate List")) {
@@ -67,7 +68,7 @@ public class HyperCrateInventoryListener implements Listener {
                 if (itemType.equalsIgnoreCase("delete")) {
                     crate.delete();
                     player.closeInventory();
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Deleted_Crate"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Deleted_Crate"));
                 } else if (itemType.equalsIgnoreCase("items")) {
                     player.openInventory(HyperCrateSettingsGUI.getCrateItemSettingsGUI(crate));
                 } else if (itemType.equalsIgnoreCase("material")) {
@@ -84,21 +85,21 @@ public class HyperCrateInventoryListener implements Listener {
                     HyperCrate.getItemClickHandler().addItemClick(itemClick);
                 } else if (itemType.equalsIgnoreCase("holo")) {
                     player.closeInventory();
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Holo_Message"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Holo_Message"));
                     TypeChat typeChat = new TypeChat(player.getUniqueId(), crate, TypeChatType.HOLO, 600L);
                     HyperCrate.getTypeChatHandler().addTypeChat(typeChat);
                 } else if (itemType.equalsIgnoreCase("sound")) {
                     player.closeInventory();
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Sound_Message"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Sound_Message"));
                     TypeChat typeChat = new TypeChat(player.getUniqueId(), crate, TypeChatType.SOUND, 600L);
                     HyperCrate.getTypeChatHandler().addTypeChat(typeChat);
                 } else if (itemType.equalsIgnoreCase("name")) {
                     player.closeInventory();
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Message"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("TypeChat_Message"));
                     TypeChat typeChat = new TypeChat(player.getUniqueId(), crate, TypeChatType.NAME, 600L);
                     HyperCrate.getTypeChatHandler().addTypeChat(typeChat);
                 } else if (itemType.equalsIgnoreCase("getCrateBlock")) {
-                    player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
+                    ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Gave_Item"));
                     player.closeInventory();
                     player.getInventory().addItem(crate.getCrateSettings().getCrateBlock());
                 } else if (itemType.equalsIgnoreCase("getCrateKey")) {
@@ -122,6 +123,6 @@ public class HyperCrateInventoryListener implements Listener {
             crate.getCrateItems().addCrateItem(itemStack);
         }
         HyperCrate.getCrateHandler().saveCrateHandler();
-        player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item"));
+        ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Set_Item"));
     }
 }

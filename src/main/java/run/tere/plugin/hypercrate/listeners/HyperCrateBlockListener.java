@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 public class HyperCrateBlockListener implements Listener {
     @EventHandler
@@ -22,18 +23,18 @@ public class HyperCrateBlockListener implements Listener {
         ItemStack itemStack = e.getItemInHand();
         if (NBTEditor.contains(itemStack, "HyperCrateKey")) {
             e.setCancelled(true);
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Cannot_Place_Key"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Cannot_Place_Key"));
             return;
         }
         if ((!NBTEditor.contains(itemStack, "HyperCrateBlock")) || (!HyperCrate.getCrateHandler().containsCrateFromKey(NBTEditor.getString(itemStack, "HyperCrateBlock")))) return;
         if (!player.hasPermission("hypercrate.actions.place")) {
             e.setCancelled(true);
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
             return;
         }
         Crate crate = HyperCrate.getCrateHandler().getCrateFromKey(NBTEditor.getString(itemStack, "HyperCrateBlock"));
         crate.createBlock(blockLocation);
-        player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Create_Block"));
+        ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Create_Block"));
     }
 
     @EventHandler
@@ -45,20 +46,20 @@ public class HyperCrateBlockListener implements Listener {
         Crate crate = HyperCrate.getCrateHandler().getCrateFromLocation(blockLocation);
         if (!player.hasPermission("hypercrate.actions.break")) {
             e.setCancelled(true);
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
             return;
         }
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
             e.setCancelled(true);
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Not_Creative_Error"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Not_Creative_Error"));
             return;
         }
         if (!player.isSneaking()) {
             e.setCancelled(true);
-            player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Sneak_Break"));
+            ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Sneak_Break"));
             return;
         }
         crate.breakBlock(blockLocation);
-        player.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Break_Block"));
+        ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Break_Block"));
     }
 }
