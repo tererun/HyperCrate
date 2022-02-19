@@ -16,6 +16,7 @@ import run.tere.plugin.hypercrate.consts.languages.Language;
 import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                 sender.sendMessage("§e§lCommands§f:");
                 sender.sendMessage("§a /hypercrate§f: Show this help");
                 sender.sendMessage("§a /hypercrate help§f: Show this help");
-                sender.sendMessage("§a /hypercrate givekey <Player> <CrateName> <Amount>§f: Give player crate key");
+                sender.sendMessage("§a /hypercrate givekey <Player> <Amount> <CrateName>§f: Give player crate key");
                 sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
             } else {
                 if (args[0].equalsIgnoreCase("givekey")) {
@@ -42,13 +43,13 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
                         return true;
                     }
-                    if (args.length < 4 || !NumberUtils.isDigits(args[3])) {
+                    if (args.length < 4 || !NumberUtils.isDigits(args[2])) {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Wrong_Command"));
                         return true;
                     }
-                    int amount = Integer.parseInt(args[3]);
+                    int amount = Integer.parseInt(args[2]);
                     StringBuilder crateName = new StringBuilder();
-                    for (int i=2; i<args.length; i++) {
+                    for (int i = 3; i<args.length; i++) {
                         crateName.append(args[i]);
                         if (i != (args.length - 1)) {
                             crateName.append(" ");
@@ -138,10 +139,10 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                 }
             }
             return list;
-        } else if (args.length >= 2) {
+        } else {
             if (tabList.contains(args[0])) {
                 if (args[0].equalsIgnoreCase("givekey")) {
-                    if (sender.hasPermission("hypercrate.commands.gisvekey")) {
+                    if (sender.hasPermission("hypercrate.commands.givekey")) {
                         if (args.length == 2) {
                             List<String> playerNames = new ArrayList<>();
                             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -176,15 +177,17 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                                 }
                             }
                         } else if (args.length == 3) {
+                            return Arrays.asList("1", "64");
+                        } else if (args.length == 4) {
                             List<String> crateNames = new ArrayList<>();
                             for (Crate crate : HyperCrate.getCrateHandler().getCrateList()) {
                                 crateNames.add(translateAlternateColorCodes(crate.getCrateSettings().getCrateName()));
                             }
-                            if (args[2].length() == 0) {
+                            if (args[3].length() == 0) {
                                 return crateNames;
                             } else {
                                 for (String crateName : crateNames) {
-                                    if (crateName.startsWith(args[2])) {
+                                    if (crateName.startsWith(args[3])) {
                                         return Collections.singletonList(crateName);
                                     }
                                 }
