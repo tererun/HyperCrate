@@ -6,7 +6,7 @@
 
     <groupId>run.tere.plugin</groupId>
     <artifactId>HyperCrate</artifactId>
-    <version>Patch-1.0.10</version>
+    <version>Patch-1.1.0</version>
     <packaging>jar</packaging>
 
     <name>HyperCrate</name>
