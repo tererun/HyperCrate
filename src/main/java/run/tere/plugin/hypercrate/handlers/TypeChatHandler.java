@@ -11,6 +11,7 @@ import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.consts.crates.Crate;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChat;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChatType;
+import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.HashSet;
 import java.util.UUID;
