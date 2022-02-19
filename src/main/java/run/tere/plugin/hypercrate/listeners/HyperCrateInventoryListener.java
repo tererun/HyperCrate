@@ -104,7 +104,7 @@ public class HyperCrateInventoryListener implements Listener {
                     player.getInventory().addItem(crate.getCrateSettings().getCrateBlock());
                 } else if (itemType.equalsIgnoreCase("getCrateKey")) {
                     player.closeInventory();
-                    crate.giveCrateKey(player);
+                    crate.giveCrateKey(player, 1);
                 }
             }
         }

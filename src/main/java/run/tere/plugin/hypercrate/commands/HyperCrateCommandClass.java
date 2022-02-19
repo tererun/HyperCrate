@@ -1,6 +1,7 @@
 package run.tere.plugin.hypercrate.commands;
 
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -33,7 +34,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                 sender.sendMessage("§e§lCommands§f:");
                 sender.sendMessage("§a /hypercrate§f: Show this help");
                 sender.sendMessage("§a /hypercrate help§f: Show this help");
-                sender.sendMessage("§a /hypercrate givekey <Player> <CrateName>§f: Give player crate key");
+                sender.sendMessage("§a /hypercrate givekey <Player> <CrateName> <Amount>§f: Give player crate key");
                 sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
             } else {
                 if (args[0].equalsIgnoreCase("givekey")) {
@@ -41,11 +42,11 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
                         return true;
                     }
-                    if (args.length < 3) {
+                    if (args.length < 4 || !NumberUtils.isDigits(args[3])) {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Wrong_Command"));
                         return true;
                     }
-
+                    int amount = Integer.parseInt(args[3]);
                     StringBuilder crateName = new StringBuilder();
                     for (int i=2; i<args.length; i++) {
                         crateName.append(args[i]);
@@ -62,7 +63,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                     for (Entity entity : Bukkit.selectEntities(sender, args[1])) {
                         if (entity instanceof Player) {
                             Player player = (Player) entity;
-                            crate.giveCrateKey(player);
+                            crate.giveCrateKey(player, amount);
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("settings")) {
