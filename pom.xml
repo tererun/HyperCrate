@@ -6,7 +6,7 @@
 
     <groupId>run.tere.plugin</groupId>
     <artifactId>HyperCrate</artifactId>
-    <version>Patch-1.1.1</version>
+    <version>Patch-1.1.2</version>
     <packaging>jar</packaging>
 
     <name>HyperCrate</name>
@@ -88,7 +88,7 @@
         <dependency>
             <groupId>io.github.bananapuncher714</groupId>
             <artifactId>nbteditor</artifactId>
-            <version>7.18.1</version>
+            <version>7.18.3</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
