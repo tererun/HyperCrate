@@ -43,3 +43,16 @@ TypeChat_Sound_Message: "§aYou have 30 seconds to enter the target text. The fo
 TypeChat_Already_Exists_Name_Error: "§cThat name has already been used by other crates."
 Set_TypeChat: "§aSet Text!"
 Set_TypeChat_Timeup: "§aThe text set has been canceled because the valid time has expired."
+
+CommandHelp_Author: "Author"
+CommandHelp_Version: "Version"
+CommandHelp_Commands: "Commands"
+CommandHelp_Help: "Show this help"
+CommandHelp_GiveKey: "Give player crate key"
+CommandHelp_Settings: "Open the GUI settings"
+CommandHelp_Reload: "Reload HyperCrate Config"
+
+GUI_Settings: "§6§lHyperCrate Settings"
+GUI_CrateList: "§6§lHyperCrate Crate List"
+GUI_CrateSettings: "§6§lHyperCrate Crate Settings"
+GUI_CrateRewardsSettings: "§6§lHyperCrate ItemRewards Settings"

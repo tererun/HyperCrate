@@ -29,14 +29,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                     sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
                     return true;
                 }
-                sender.sendMessage("§7======= §f§l<§6HyperCrate§f§l> §7=======");
-                sender.sendMessage("§e§lAuthor§f: tererun");
-                sender.sendMessage("§e§lVersion§f: " + HyperCrate.getPlugin().getDescription().getVersion());
-                sender.sendMessage("§e§lCommands§f:");
-                sender.sendMessage("§a /hypercrate§f: Show this help");
-                sender.sendMessage("§a /hypercrate help§f: Show this help");
-                sender.sendMessage("§a /hypercrate givekey <Player> <Amount> <CrateName>§f: Give player crate key");
-                sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
+                sendHelpMessage(sender);
             } else {
                 if (args[0].equalsIgnoreCase("givekey")) {
                     if (!sender.hasPermission("hypercrate.commands.givekey")) {
@@ -83,16 +76,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
                         return true;
                     }
-                    sender.sendMessage("§7======= §f§l<§6HyperCrate§f§l> §7=======");
-                    sender.sendMessage("§e§lAuthor§f: tererun");
-                    sender.sendMessage("§e§lVersion§f: " + HyperCrate.getPlugin().getDescription().getVersion());
-                    sender.sendMessage("§e§lCommands§f:");
-                    sender.sendMessage("§a /hypercrate§f: Show this help");
-                    sender.sendMessage("§a /hypercrate help§f: Show this help");
-                    sender.sendMessage("§a /hypercrate givekey <Player> <CrateName>§f: Give player crate key");
-                    //sender.sendMessage("§a /hypercrate rollcrate <Player> <CrateName>§f: roll the crate");
-                    sender.sendMessage("§a /hypercrate settings§f: Open the GUI settings");
-                    sender.sendMessage("§a /hypercrate reload§f: Reload HyperCrate Config");
+                    sendHelpMessage(sender);
                 } else if (args[0].equalsIgnoreCase("reload")) {
                     if (!sender.hasPermission("hypercrate.commands.reload")) {
                         sender.sendMessage(HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Permission_Error"));
@@ -113,6 +97,18 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
         return false;
     }
 
+    private void sendHelpMessage(CommandSender sender) {
+        sender.sendMessage("§7======= §f§l<§6HyperCrate§f§l> §7=======");
+        sender.sendMessage("§e§l" + HyperCrate.getLanguage().get("CommandHelp_Author") + "§f: tererun");
+        sender.sendMessage("§e§l" + HyperCrate.getLanguage().get("CommandHelp_Version") + "§f: " + HyperCrate.getPlugin().getDescription().getVersion());
+        sender.sendMessage("§e§l" + HyperCrate.getLanguage().get("CommandHelp_Commands") + "§f:");
+        sender.sendMessage("§a /hypercrate§f: "  + HyperCrate.getLanguage().get("CommandHelp_Help"));
+        sender.sendMessage("§a /hypercrate help§f: " + HyperCrate.getLanguage().get("CommandHelp_Help"));
+        sender.sendMessage("§a /hypercrate givekey <Player> <Amount> <CrateName>§f: " + HyperCrate.getLanguage().get("CommandHelp_GiveKey"));
+        sender.sendMessage("§a /hypercrate settings§f: " + HyperCrate.getLanguage().get("CommandHelp_Settings"));
+        sender.sendMessage("§a /hypercrate reload§f: " + HyperCrate.getLanguage().get("CommandHelp_Reload"));
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (!command.getName().equalsIgnoreCase("hypercrate")) {
@@ -124,7 +120,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
         if (sender.hasPermission("hypercrate.commands.settings")) tabList.add("settings");
         if (sender.hasPermission("hypercrate.commands.reload")) tabList.add("reload");
         if (args.length == 1) {
-            if (args[0].length() == 0) {
+            if (args[0].isEmpty()) {
                 List<String> list = new ArrayList<>();
                 if (sender.hasPermission("hypercrate.commands.help")) list.add("help");
                 if (sender.hasPermission("hypercrate.commands.givekey")) list.add("givekey");
@@ -148,7 +144,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                             for (Player player : Bukkit.getOnlinePlayers()) {
                                 playerNames.add(player.getName());
                             }
-                            if (args[1].length() == 0) {
+                            if (args[1].isEmpty()) {
                                 List<String> tabListArgsOne = new ArrayList<>();
                                 tabListArgsOne.add("@a");
                                 tabListArgsOne.add("@e");
@@ -183,7 +179,7 @@ public class HyperCrateCommandClass implements CommandExecutor, TabCompleter {
                             for (Crate crate : HyperCrate.getCrateHandler().getCrateList()) {
                                 crateNames.add(translateAlternateColorCodes(crate.getCrateSettings().getCrateName()));
                             }
-                            if (args[3].length() == 0) {
+                            if (args[3].isEmpty()) {
                                 return crateNames;
                             } else {
                                 for (String crateName : crateNames) {

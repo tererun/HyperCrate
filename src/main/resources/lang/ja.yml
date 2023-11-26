@@ -43,3 +43,17 @@ TypeChat_Sound_Message: "§a設定したいテキストを30秒以内にチャ�
 TypeChat_Already_Exists_Name_Error: "§cそのような名前のクレートは既に存在します!"
 Set_TypeChat: "§aテキストを設定しました!"
 Set_TypeChat_Timeup: "§a有効期限が過ぎた為、テキスト入力が無効化されました。"
+
+CommandHelp_Author: "製作者"
+CommandHelp_Version: "バージョン"
+CommandHelp_Commands: "コマンド"
+CommandHelp_Main: "このヘルプを表示します。"
+CommandHelp_Help: "このヘルプを表示します。"
+CommandHelp_GiveKey: "プレイヤーにCrateの鍵を与えます。"
+CommandHelp_Settings: "設定のGUIを開きます。"
+CommandHelp_Reload: "HyperCrateのConfigを再読み込みします。"
+
+GUI_Settings: "§6§lHyperCrate 設定"
+GUI_CrateList: "§6§lHyperCrate のCrate一覧"
+GUI_CrateSettings: "§6§lHyperCrate Crate 設定"
+GUI_CrateRewardsSettings: "§6§lHyperCrate 報酬設定"

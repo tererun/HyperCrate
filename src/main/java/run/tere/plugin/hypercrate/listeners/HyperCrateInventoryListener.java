@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import run.tere.plugin.hypercrate.HyperCrate;
 import run.tere.plugin.hypercrate.apis.InventoryAPI;
@@ -17,7 +19,9 @@ import run.tere.plugin.hypercrate.consts.itemclick.ItemClick;
 import run.tere.plugin.hypercrate.consts.itemclick.ItemClickType;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChat;
 import run.tere.plugin.hypercrate.consts.typechat.TypeChatType;
+import run.tere.plugin.hypercrate.guis.HyperCrateInventoryHolder;
 import run.tere.plugin.hypercrate.guis.HyperCrateSettingsGUI;
+import run.tere.plugin.hypercrate.guis.holder.*;
 import run.tere.plugin.hypercrate.utils.ChatUtil;
 
 import java.util.ArrayList;
@@ -27,21 +31,22 @@ import java.util.UUID;
 public class HyperCrateInventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
-        String inventoryTitle = e.getView().getTitle();
-        if (inventoryTitle.endsWith("§6§l HC ItemRewards")) {
+        Inventory inventory = e.getInventory();
+        InventoryHolder inventoryHolder = inventory.getHolder();
+        if (inventoryHolder instanceof CrateItemRewardsGUI) {
             e.setCancelled(true);
             return;
         }
-        if (!inventoryTitle.startsWith("§6§lHyperCrate ")) return;
+        if (!(inventoryHolder instanceof HyperCrateInventoryHolder)) return;
         Player player = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem != null) {
             if (!NBTEditor.contains(clickedItem, "HyperCrateGUIItem")) {
-                if (!inventoryTitle.startsWith("§6§lHyperCrate ItemRewards Settings§7 ")) e.setCancelled(true);
+                if (!(inventoryHolder instanceof CrateItemSettingsGUI)) e.setCancelled(true);
                 return;
             }
             String itemType = NBTEditor.getString(clickedItem, "HyperCrateGUIItem");
-            if (inventoryTitle.equalsIgnoreCase("§6§lHyperCrate Settings")) {
+            if (inventoryHolder instanceof SettingsGUI) {
                 e.setCancelled(true);
                 if (itemType.equalsIgnoreCase("list")) {
                     player.openInventory(HyperCrateSettingsGUI.getCrateListGUI());
@@ -57,10 +62,10 @@ public class HyperCrateInventoryListener implements Listener {
                     ChatUtil.sendMessage(player, HyperCrate.getLanguage().get("Prefix") + " " + HyperCrate.getLanguage().get("Created_Crate"));
                     player.openInventory(HyperCrateSettingsGUI.getCrateSettingGUI(crate));
                 }
-            } else if (inventoryTitle.equalsIgnoreCase("§6§lHyperCrate Crate List")) {
+            } else if (inventoryHolder instanceof ListGUI) {
                 e.setCancelled(true);
                 player.openInventory(HyperCrateSettingsGUI.getCrateSettingGUI(HyperCrate.getCrateHandler().getCrateFromKey(itemType)));
-            } else if (inventoryTitle.equalsIgnoreCase("§6§lHyperCrate Crate Settings")) {
+            } else if (inventoryHolder instanceof CrateSettingsGUI) {
                 e.setCancelled(true);
                 ItemStack crateInfo = e.getInventory().getItem(8);
                 if ((crateInfo == null) || (!crateInfo.hasItemMeta()) || (!crateInfo.getItemMeta().hasLore())) return;
@@ -113,10 +118,11 @@ public class HyperCrateInventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
-        String inventoryTitle = e.getView().getTitle();
-        if (!inventoryTitle.startsWith("§6§lHyperCrate ItemRewards Settings§7 ")) return;
+        InventoryHolder inventoryHolder = e.getInventory().getHolder();
+        if (!(inventoryHolder instanceof CrateItemSettingsGUI)) return;
+        CrateItemSettingsGUI crateItemSettingsGUI = (CrateItemSettingsGUI) inventoryHolder;
         Player player = (Player) e.getPlayer();
-        Crate crate = HyperCrate.getCrateHandler().getCrateFromKey(inventoryTitle.split(" ")[3]);
+        Crate crate = HyperCrate.getCrateHandler().getCrateFromKey(crateItemSettingsGUI.getCrateKey());
         crate.getCrateItems().clearAll();
         for (ItemStack itemStack : e.getInventory().getContents()) {
             if (itemStack == null) continue;

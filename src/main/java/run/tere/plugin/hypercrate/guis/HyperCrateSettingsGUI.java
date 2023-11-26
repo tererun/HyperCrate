@@ -11,7 +11,7 @@ import run.tere.plugin.hypercrate.consts.crates.Crate;
 import java.util.Arrays;
 
 public class HyperCrateSettingsGUI {
-    private static String key = "HyperCrateGUIItem";
+    public static String key = "HyperCrateGUIItem";
 
     public static Inventory getSettingsGUI() {
         Inventory inventory = Bukkit.createInventory(null, 9, "§6§lHyperCrate Settings");
