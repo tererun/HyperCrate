@@ -17,7 +17,7 @@ public class CrateSettingsGUI implements HyperCrateInventoryHolder {
     private Inventory inventory;
 
     public CrateSettingsGUI(Crate crate) {
-        this.inventory = Bukkit.createInventory(null, 27, HyperCrate.getLanguage().get("GUI_CrateSettings"));
+        this.inventory = Bukkit.createInventory(this, 27, HyperCrate.getLanguage().get("GUI_CrateSettings"));
         inventory.setItem(0, ItemStackAPI.getItemStack(Material.BARRIER, 1, HyperCrate.getLanguage().get("Delete_Crate"), null, HyperCrateSettingsGUI.key, "delete"));
         inventory.setItem(8, ItemStackAPI.getItemStack(Material.BOOK, 1, "§2§lINFO", Arrays.asList("§aCrateName§f:", crate.getCrateSettings().getCrateName(), "§aUUID§f:", crate.getCrateSettings().getCrateKey()), HyperCrateSettingsGUI.key, "info"));
         inventory.setItem(13, ItemStackAPI.getItemStack(Material.CHEST, 1, HyperCrate.getLanguage().get("Change_ItemRewards"), null, HyperCrateSettingsGUI.key, "items"));

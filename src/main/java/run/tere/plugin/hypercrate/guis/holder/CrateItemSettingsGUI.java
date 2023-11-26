@@ -15,7 +15,7 @@ public class CrateItemSettingsGUI implements HyperCrateInventoryHolder {
 
     public CrateItemSettingsGUI(Crate crate) {
         this.crateKey = crate.getCrateSettings().getCrateKey();
-        this.inventory = Bukkit.createInventory(null, 54, HyperCrate.getLanguage().get("GUI_CrateRewardsSettings"));
+        this.inventory = Bukkit.createInventory(this, 54, HyperCrate.getLanguage().get("GUI_CrateRewardsSettings"));
         for (ItemStack crateItem : crate.getCrateItems().getCrateItems()) {
             inventory.addItem(crateItem);
         }

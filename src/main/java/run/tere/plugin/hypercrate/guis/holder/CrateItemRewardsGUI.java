@@ -12,7 +12,7 @@ public class CrateItemRewardsGUI implements HyperCrateInventoryHolder {
     private Inventory inventory;
 
     public CrateItemRewardsGUI(Crate crate) {
-        this.inventory = Bukkit.createInventory(null, 54, "§6§l" + crate.getCrateSettings().getCrateName());
+        this.inventory = Bukkit.createInventory(this, 54, "§6§l" + crate.getCrateSettings().getCrateName());
         for (ItemStack crateItem : crate.getCrateItems().getCrateItems()) {
             inventory.addItem(crateItem);
         }

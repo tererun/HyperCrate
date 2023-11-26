@@ -14,7 +14,7 @@ public class ListGUI implements HyperCrateInventoryHolder {
     private Inventory inventory;
 
     public ListGUI() {
-        this.inventory = Bukkit.createInventory(null, 54, HyperCrate.getLanguage().get("GUI_CrateList"));
+        this.inventory = Bukkit.createInventory(this, 54, HyperCrate.getLanguage().get("GUI_CrateList"));
         for (Crate crate : HyperCrate.getCrateHandler().getCrateList()) {
             inventory.addItem(ItemStackAPI.getItemStack(crate.getCrateSettings().getBlockMaterial(), 1, crate.getCrateSettings().getCrateName(), null, HyperCrateSettingsGUI.key, crate.getCrateSettings().getCrateKey()));
         }
